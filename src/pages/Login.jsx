@@ -34,7 +34,7 @@ function Login() {
     let users = [];
 
     if (localStorage.getItem(users)) {
-      users = JSON.parse(localStorage.setItem('users')) || []
+      users = JSON.parse(localStorage.setItem('users'))
     }
 
     return users
