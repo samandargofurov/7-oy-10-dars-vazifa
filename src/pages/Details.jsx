@@ -46,7 +46,7 @@ function Details() {
       amount: count,
       image: data.data.attributes.image
     };
-    let CartItem = JSON.parse(localStorage.getItem('cart'));
+    let CartItem = JSON.parse(localStorage.getItem('cart')) || [];
     CartItem.push(info);
     localStorage.setItem('cart', JSON.stringify(CartItem));
   }

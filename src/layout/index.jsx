@@ -12,7 +12,7 @@ function Layout({children}) {
     if (LoggedIn) {
       setSavedLog(true)
     }
-    const savedCart = JSON.parse(localStorage.getItem('cart'));
+    const savedCart = JSON.parse(localStorage.getItem('cart')) || [];
     setallCart(savedCart);
   }, [])
 
