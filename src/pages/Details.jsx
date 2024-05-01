@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
+import { toast, ToastContainer } from 'react-toastify';
 
 function Details() {
   const [data, setData] = useState({});
@@ -17,7 +18,6 @@ function Details() {
       )
         .then((res) => res.json())
         .then((d) => {
-          console.log(18, d);
           if (!d.data) {
             navigate("/");
           }
@@ -35,8 +35,20 @@ function Details() {
     }
   }, []);
 
-  function handleSave() {
-    
+  function handleSave(e) {
+    e.preventDefault();
+    toast.success('Item added to cart');
+    const info = {
+      id: data.data.id,
+      title: data.data.attributes.title,
+      price: data.data.attributes.price,
+      color: selectedColor,
+      amount: count,
+      image: data.data.attributes.image
+    };
+    let CartItem = JSON.parse(localStorage.getItem('cart'));
+    CartItem.push(info);
+    localStorage.setItem('cart', JSON.stringify(CartItem));
   }
 
   return (
@@ -48,6 +60,18 @@ function Details() {
       {!loading && (
         <>
           <div className="text-sm breadcrumbs">
+          <ToastContainer
+            position="top-center"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+          />
             <ul>
               <li>
                 <Link to="/">Home</Link>
@@ -114,7 +138,7 @@ function Details() {
                     <div className="flex flex-col mt-7 gap-2">
                       <label htmlFor="select">Amount</label>
                       <select
-                        className="select select-bordered w-full max-w-xs"
+                        className="select select-bordered w-20 max-w-xs"
                         id="select"
                         value={count}
                         onChange={(e) => {
@@ -129,12 +153,7 @@ function Details() {
                       </select>
                     </div>
 
-                    <button
-                      onClick={handleSave}
-                      className="btn btn-active btn-primary mt-8 uppercase"
-                    >
-                      Add to bag
-                    </button>
+                    <button onClick={handleSave} className="btn btn-active btn-primary mt-8 uppercase">Add to bag</button>
                   </div>
                 </div>
               </>

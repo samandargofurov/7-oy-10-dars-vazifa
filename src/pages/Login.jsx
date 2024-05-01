@@ -62,6 +62,7 @@ function Login() {
       localStorage.setItem('users', JSON.stringify(copied));
       setUsers(copied)
       navigate('/')
+      
       setTimeout(() => {
         navigate('/')
         setTimeout(() => {

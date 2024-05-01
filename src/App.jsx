@@ -17,7 +17,7 @@ function App() {
     const navigate = useNavigate();
 
   useEffect(() => {
-    const LoggedIn = JSON.parse(localStorage.getItem("users"))
+    let LoggedIn = JSON.parse(localStorage.getItem("users"))
     if (LoggedIn) {
       setSavedLog(LoggedIn)
     }
